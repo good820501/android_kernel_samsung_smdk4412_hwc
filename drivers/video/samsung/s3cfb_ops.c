@@ -1161,7 +1161,6 @@ int s3cfb_wait_for_vsync(struct s3cfb_global *fbdev)
 #endif
 
 
-#if defined(CONFIG_CPU_EXYNOS4212) || defined(CONFIG_CPU_EXYNOS4412)
 /**
  * s3c_fb_align_word() - align pixel count to word boundary
  * @bpp: The number of bits per pixel
@@ -1516,7 +1515,6 @@ static inline u32 wincon(u32 bits_per_pixel, u32 transp_length, u32 red_length)
 
 	return data;
 }
-#endif
 
 void s3c_fb_set_busfreq(struct s3cfb_global *fbdev, unsigned int num_of_win)
 {
@@ -1687,7 +1685,6 @@ static bool s3c_fb_validate_x_alignment(struct s3cfb_global *fbdev, int x, u32 w
 	return 1;
 }
 
-#if defined(CONFIG_CPU_EXYNOS4212) || defined(CONFIG_CPU_EXYNOS4412)
 static int s3c_fb_set_win_buffer(struct s3cfb_global *fbdev,
 		struct fb_info *fb, struct s3c_fb_win_config *win_config,
 		struct s3c_reg_data *regs)
@@ -1966,7 +1963,6 @@ static int s3c_fb_set_win_config(struct s3cfb_global *fbdev,
 
 	return ret;
 }
-#endif
 
 int s3cfb_ioctl(struct fb_info *fb, unsigned int cmd, unsigned long arg)
 {
@@ -2162,7 +2158,6 @@ int s3cfb_ioctl(struct fb_info *fb, unsigned int cmd, unsigned long arg)
 			s3cfb_set_alpha_mode(fbdev, win->id, p.alpha_mode);
 		break;
 
-#if defined(CONFIG_CPU_EXYNOS4212) || defined(CONFIG_CPU_EXYNOS4412)
 	case S3CFB_WIN_CONFIG:
 		if (copy_from_user(&p.win_data,
 				   (struct s3c_fb_win_config_data __user *)arg,
@@ -2182,13 +2177,14 @@ int s3cfb_ioctl(struct fb_info *fb, unsigned int cmd, unsigned long arg)
 			break;
 		}
 		break;
-#endif
+
 	case S3CFB_SET_INITIAL_CONFIG:
 		fix->smem_start = fbdev->initial_fix.smem_start;
 		fix->smem_len = fbdev->initial_fix.smem_len;
 		fix->line_length = fbdev->initial_fix.line_length;
 		memcpy(var, &(fbdev->initial_var), sizeof(struct fb_var_screeninfo));
 		break;
+
 	case S3CFB_SUPPORT_FENCE:
 		if (copy_from_user(&support_fence, (unsigned int *)arg, sizeof(unsigned int)))
 			ret = -EFAULT;
