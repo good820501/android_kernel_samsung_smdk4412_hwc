@@ -2,6 +2,7 @@
 # Makefile for the s3c framebuffer driver
 #
 ifeq ($(CONFIG_FB_S5P),y)
+obj-y				+= s3c-fb.o
 obj-$(CONFIG_FB_S5P_S6C1372)	+= s3cfb_s6c1372.o
 obj-$(CONFIG_FB_S5P_S6F1202A)	+= s3cfb_s6c1372.o
 obj-$(CONFIG_FB_S5P_LTE480WV)	+= s3cfb_lte480wv.o
