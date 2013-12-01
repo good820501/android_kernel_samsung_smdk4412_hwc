@@ -150,6 +150,11 @@
 #define VIDCON2_ORGYCbCr		(1 << 8)
 #define VIDCON2_YUVORDCrCb		(1 << 7)
 
+#define VIDCON2_RGB_ORDER_E_MASK        (0x7 << 19)
+#define VIDCON2_RGB_ORDER_E_BGR         (0x4 << 19)
+#define VIDCON2_RGB_ORDER_O_MASK        (0x7 << 16)
+#define VIDCON2_RGB_ORDER_O_BGR         (0x4 << 16)
+
 /* PRTCON (S3C6410, S5PC100)
  * Might not be present in the S3C6410 documentation,
  * but tests prove it's there almost for sure; shouldn't hurt in any case.
@@ -356,6 +361,10 @@
 #define VIDW_BUF_SIZE_PAGEWIDTH_LIMIT		(0x1fff)
 #define VIDW_BUF_SIZE_PAGEWIDTH(_x)		(((_x) & 0x1fff) << 0)
 
+#define SHD_VIDW_BUF_START(_buff)               (0x40A0 + ((_buff) * 8))
+#define SHD_VIDW_BUF_END(_buff)                 (0x40D0 + ((_buff) * 8))
+#define SHD_VIDW_BUF_SIZE(_buff)                (0x4100 + ((_buff) * 8))
+
 /* Interrupt controls and status */
 
 #define VIDINTCON0_FIFOINTERVAL_MASK		(0x3f << 20)
@@ -493,3 +502,5 @@
 #define VIDW0ALPHA0				(0x200)
 #define VIDW0ALPHA1				(0x204)
 #define DUALRGB					(0x27c)
+#define VIDW_ALPHA0(_x)                         (0x21C + ((_x) * 8))
+#define VIDW_ALPHA1(_x)                         (0x220 + ((_x) * 8))

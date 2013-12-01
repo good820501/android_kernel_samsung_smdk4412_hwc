@@ -13,6 +13,22 @@
 #include <linux/dma-contiguous.h>
 #endif
 
+#define DMA_ERROR_CODE  (~0)
+extern struct dma_map_ops arm_dma_ops;
+
+static inline struct dma_map_ops *get_dma_ops(struct device *dev)
+{
+        if (dev && dev->archdata.dma_ops)
+                return dev->archdata.dma_ops;
+        return &arm_dma_ops;
+}
+
+static inline void set_dma_ops(struct device *dev, struct dma_map_ops *ops)
+{
+        BUG_ON(!dev);
+        dev->archdata.dma_ops = ops;
+}
+
 #ifdef __arch_page_to_dma
 #error Please update to __arch_pfn_to_dma
 #endif

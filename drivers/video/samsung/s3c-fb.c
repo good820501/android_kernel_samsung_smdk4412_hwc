@@ -780,13 +780,13 @@ static void s3c_fb_enable(struct s3c_fb *sfb, int enable)
 
 		s3c_fb_set_rgb_timing(sfb);
 		iovmm_activate(&s5p_device_fimd0.dev);
-		ret = platform_sysmmu_on(sfb->dev);
+		/*ret = platform_sysmmu_on(sfb->dev);
 	        if (ret < 0) {
 			pr_err("FIMD SYSMMU ON FAILED \n");
 			iovmm_deactivate(&s5p_device_fimd0.dev);
 			pm_runtime_put_sync(sfb->dev);
 			return;
-		}
+		}*/
 	}
 
 	vidcon0 = readl(sfb->regs + VIDCON0);
@@ -812,9 +812,9 @@ static void s3c_fb_enable(struct s3c_fb *sfb, int enable)
 		clk_disable(sfb->bus_clk);
 		iovmm_deactivate(&s5p_device_fimd0.dev);
 		pm_runtime_put_sync(sfb->dev);
-		ret = platform_sysmmu_off(sfb->dev);
+		/*ret = platform_sysmmu_off(sfb->dev);
 	        if (ret < 0)
-			pr_err("FIMD SYSMMU OFF FAILED \n");
+			pr_err("FIMD SYSMMU OFF FAILED \n");*/
 	}
 
 	sfb->output_on = enable;
@@ -1357,7 +1357,7 @@ static int s3c_fb_wait_for_vsync(struct s3c_fb *sfb, u32 crtc)
 	ret = wait_event_interruptible_timeout(sfb->vsync_info.wait,
 		#if defined(CONFIG_FB_ION_EXYNOS)
 				       !ktime_equal(timestamp,sfb->vsync_info.timestamp),
-			#else		   
+			#else
 			count != sfb->vsync_info.count,
 			#endif
 				       msecs_to_jiffies(VSYNC_TIMEOUT_MSEC));

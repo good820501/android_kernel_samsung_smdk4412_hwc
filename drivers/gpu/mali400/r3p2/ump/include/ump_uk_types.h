@@ -49,7 +49,7 @@ typedef enum
 	_UMP_IOC_SWITCH_HW_USAGE,
 	_UMP_IOC_LOCK,
 	_UMP_IOC_UNLOCK,
-	_UMP_IOC_ION_IMPORT,
+	_UMP_IOC_ION_IMPORT
 }_ump_uk_functions;
 
 typedef enum

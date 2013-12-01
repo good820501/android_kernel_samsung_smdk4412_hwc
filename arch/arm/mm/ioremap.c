@@ -319,3 +319,12 @@ void __iounmap(volatile void __iomem *io_addr)
 	vunmap(addr);
 }
 EXPORT_SYMBOL(__iounmap);
+
+void (*arch_iounmap)(volatile void __iomem *) = __iounmap;
+
+void __arm_iounmap(volatile void __iomem *io_addr)
+{
+        arch_iounmap(io_addr);
+}
+EXPORT_SYMBOL(__arm_iounmap);
+
