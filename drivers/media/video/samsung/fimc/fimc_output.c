@@ -203,22 +203,22 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	fimc_outdev_dma_auto_dst_resize(&fimd_rect_virtual);
 
 	/* Get WIN var_screeninfo */
-	ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
-						(unsigned long)&var);
+	//ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
+	//					(unsigned long)&var);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(FBIOGET_VSCREENINFO) fail\n");
 		return -EINVAL;
 	}
 
 	/* window path : DMA */
-	ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_PATH, DATA_PATH_DMA);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_PATH, DATA_PATH_DMA);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_PATH) fail\n");
 		return -EINVAL;
 	}
 
 	/* Don't allocate the memory. */
-	ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_OTHER);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_OTHER);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_MEM) fail\n");
 		return -EINVAL;
@@ -230,8 +230,8 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	var.xres = fimd_rect.width;
 	var.yres = fimd_rect.height;
 
-	ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
-						(unsigned long)&var);
+	//ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
+	//					(unsigned long)&var);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(FBIOPUT_VSCREENINFO) fail\n");
 		return -EINVAL;
@@ -240,8 +240,8 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	/* Update WIN position */
 	window.x = fimd_rect.left;
 	window.y = fimd_rect.top;
-	ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
-			(unsigned long)&window);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
+	//		(unsigned long)&window);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_WIN_POSITION) fail\n");
 		return -EINVAL;
@@ -253,8 +253,8 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 		return -EINVAL;
 	}
 
-	ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR,
-			(unsigned long)ctx->dst[idx].base[FIMC_ADDR_Y]);
+	//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR,
+	//		(unsigned long)ctx->dst[idx].base[FIMC_ADDR_Y]);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_ADDR) fail\n");
 		return -EINVAL;
@@ -264,8 +264,8 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	/* Remarked for better screen display
 	 * when dynamic screen size change is requested
 	 */
-	ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ON,
-							(unsigned long)NULL);
+	//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ON,
+	//						(unsigned long)NULL);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_ON) fail\n");
 		return -EINVAL;
@@ -1559,32 +1559,32 @@ int fimc_start_fifo(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	}
 
 	/* Get WIN var_screeninfo */
-	ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
-						(unsigned long)&var);
+	//ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
+	//					(unsigned long)&var);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(FBIOGET_VSCREENINFO) fail\n");
 		return -EINVAL;
 	}
 
 	/* Don't allocate the memory. */
-	if (ctx->pix.field == V4L2_FIELD_NONE)
-		ret = s3cfb_direct_ioctl(id,
-					S3CFB_SET_WIN_PATH, DATA_PATH_FIFO);
-	else if (ctx->pix.field == V4L2_FIELD_INTERLACED_TB)
-		ret = s3cfb_direct_ioctl(id,
-					S3CFB_SET_WIN_PATH, DATA_PATH_IPC);
+	//if (ctx->pix.field == V4L2_FIELD_NONE)
+	//	ret = s3cfb_direct_ioctl(id,
+	//				S3CFB_SET_WIN_PATH, DATA_PATH_FIFO);
+	//else if (ctx->pix.field == V4L2_FIELD_INTERLACED_TB)
+	//	ret = s3cfb_direct_ioctl(id,
+	//				S3CFB_SET_WIN_PATH, DATA_PATH_IPC);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_PATH) fail\n");
 		return -EINVAL;
 	}
 
-	ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_NONE);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_NONE);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_MEM) fail\n");
 		return -EINVAL;
 	}
 
-	ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_ADDR, 0x00000000);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_ADDR, 0x00000000);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_SET_WIN_ADDR) fail\n");
 		return -EINVAL;
@@ -1595,8 +1595,8 @@ int fimc_start_fifo(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	var.yres_virtual = fimd_rect.height;
 	var.xres = fimd_rect.width;
 	var.yres = fimd_rect.height;
-	ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
-					(unsigned long)&var);
+	//ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
+	//				(unsigned long)&var);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(FBIOPUT_VSCREENINFO) fail\n");
 		return -EINVAL;
@@ -1605,8 +1605,8 @@ int fimc_start_fifo(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	/* Update WIN position */
 	window.x = fimd_rect.left;
 	window.y = fimd_rect.top;
-	ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
-			(unsigned long)&window);
+	//ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
+	//		(unsigned long)&window);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_WIN_POSITION) fail\n");
 		return -EINVAL;
@@ -2214,8 +2214,8 @@ int fimc_streamoff_output(void *fh)
 		/* Need some delay to waiting reamined operation */
 		msleep(100);
 
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_OFF,
-			(unsigned long)NULL);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_OFF,
+		//	(unsigned long)NULL);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_OFF) fail\n");
 			return -EINVAL;
@@ -2223,20 +2223,20 @@ int fimc_streamoff_output(void *fh)
 
 		/* reset WIN position */
 		memset(&window, 0, sizeof(window));
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_WIN_POSITION,
-				(unsigned long)&window);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_WIN_POSITION,
+		//		(unsigned long)&window);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_WIN_POSITION) fail\n");
 			return -EINVAL;
 		}
 
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR, 0x00000000);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR, 0x00000000);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_ADDR) fail\n");
 			return -EINVAL;
 		}
 
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_MEM, DMA_MEM_NONE);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_MEM, DMA_MEM_NONE);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_MEM) fail\n");
 			return -EINVAL;
@@ -2570,22 +2570,22 @@ static int fimc_qbuf_output_dma_auto(struct fimc_control *ctrl,
 		fimc_outdev_dma_auto_dst_resize(&fimd_rect_virtual);
 
 		/* Get WIN var_screeninfo */
-		ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
-						(unsigned long)&var);
+		//ret = s3cfb_direct_ioctl(id, FBIOGET_VSCREENINFO,
+		//				(unsigned long)&var);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(FBIOGET_VSCREENINFO) fail\n");
 			return -EINVAL;
 		}
 		/* window path : DMA */
-		ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_PATH,
-							DATA_PATH_DMA);
+		//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_PATH,
+		//					DATA_PATH_DMA);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_PATH) fail\n");
 			return -EINVAL;
 		}
 
 		/* Don't allocate the memory. */
-		ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_OTHER);
+		//ret = s3cfb_direct_ioctl(id, S3CFB_SET_WIN_MEM, DMA_MEM_OTHER);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_MEM) fail\n");
 			return -EINVAL;
@@ -2597,8 +2597,8 @@ static int fimc_qbuf_output_dma_auto(struct fimc_control *ctrl,
 		var.xres = fimd_rect.width;
 		var.yres = fimd_rect.height;
 
-		ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
-							(unsigned long)&var);
+		//ret = s3cfb_direct_ioctl(id, FBIOPUT_VSCREENINFO,
+		//					(unsigned long)&var);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(FBIOPUT_VSCREENINFO) fail\n");
 			return -EINVAL;
@@ -2607,8 +2607,8 @@ static int fimc_qbuf_output_dma_auto(struct fimc_control *ctrl,
 		/* Update WIN position */
 		window.x = fimd_rect.left;
 		window.y = fimd_rect.top;
-		ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
-				(unsigned long)&window);
+		//ret = s3cfb_direct_ioctl(id, S3CFB_WIN_POSITION,
+		//		(unsigned long)&window);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_WIN_POSITION) fail\n");
 			return -EINVAL;

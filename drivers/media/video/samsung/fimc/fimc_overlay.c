@@ -117,8 +117,8 @@ static int fimc_change_fifo_position(struct fimc_control *ctrl,
 	/* Update WIN position */
 	window.x = fimd_rect.left;
 	window.y = fimd_rect.top;
-	ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_WIN_POSITION,
-			(unsigned long)&window);
+	//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_WIN_POSITION,
+	//		(unsigned long)&window);
 	if (ret < 0) {
 		fimc_err("direct_ioctl(S3CFB_WIN_POSITION) fail\n");
 		return -EINVAL;

@@ -237,10 +237,10 @@ static int fimc_init_camera(struct fimc_control *ctrl)
 	 * but it needs to set source width, height depend on LCD resolution.
 	*/
 	if ((cam->id == CAMERA_WB) || (cam->id == CAMERA_WB_B)) {
-		s3cfb_direct_ioctl(0, S3CFB_GET_LCD_WIDTH, \
-					(unsigned long)&cam->width);
-		s3cfb_direct_ioctl(0, S3CFB_GET_LCD_HEIGHT, \
-					(unsigned long)&cam->height);
+		//s3cfb_direct_ioctl(0, S3CFB_GET_LCD_WIDTH, \
+		//			(unsigned long)&cam->width);
+		//s3cfb_direct_ioctl(0, S3CFB_GET_LCD_HEIGHT, \
+		//			(unsigned long)&cam->height);
 		cam->window.width = cam->width;
 		cam->window.height = cam->height;
 		cam->initialized = 1;
@@ -1901,7 +1901,7 @@ int fimc_streamon_capture(void *fh)
 		else
 			fimc_hwset_sysreg_camblk_fimd1_wb(ctrl);
 
-		s3cfb_direct_ioctl(0, S3CFB_SET_WRITEBACK, 1);
+		//s3cfb_direct_ioctl(0, S3CFB_SET_WRITEBACK, 1);
 	}
 
 	fimc_hwset_camera_type(ctrl);
@@ -2060,8 +2060,8 @@ int fimc_streamoff_capture(void *fh)
 	}
 
 	/* Set FIMD to write back */
-	if ((ctrl->cam->id == CAMERA_WB) || (ctrl->cam->id == CAMERA_WB_B))
-		s3cfb_direct_ioctl(0, S3CFB_SET_WRITEBACK, 0);
+	//if ((ctrl->cam->id == CAMERA_WB) || (ctrl->cam->id == CAMERA_WB_B))
+	//	s3cfb_direct_ioctl(0, S3CFB_SET_WRITEBACK, 0);
 
 	/* disable camera power */
 	/* cam power off should call in the subdev release function */

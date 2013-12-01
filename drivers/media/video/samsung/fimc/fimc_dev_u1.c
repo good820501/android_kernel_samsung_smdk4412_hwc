@@ -269,8 +269,8 @@ static inline u32 fimc_irq_out_dma(struct fimc_control *ctrl,
 		fimc_err("Failed: fimc_push_outq\n");
 
 	if (ctx->overlay.mode == FIMC_OVLY_DMA_AUTO) {
-			ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR,
-				(unsigned long)ctx->dst[idx].base[FIMC_ADDR_Y]);
+			//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ADDR,
+			//	(unsigned long)ctx->dst[idx].base[FIMC_ADDR_Y]);
 
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_ADDR) fail\n");
@@ -278,8 +278,8 @@ static inline u32 fimc_irq_out_dma(struct fimc_control *ctrl,
 		}
 
 		if (ctrl->fb.is_enable == 0) {
-			ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ON,
-							(unsigned long)NULL);
+			//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_ON,
+			//				(unsigned long)NULL);
 			if (ret < 0) {
 				fimc_err("direct_ioctl(S3CFB_SET_WIN_ON)"\
 						" fail\n");
@@ -1099,18 +1099,18 @@ static int fimc_open(struct file *filp)
 		/* Apply things to interface register */
 		fimc_hwset_reset(ctrl);
 #endif
-		ctrl->fb.open_fifo = s3cfb_open_fifo;
-		ctrl->fb.close_fifo = s3cfb_close_fifo;
+		//ctrl->fb.open_fifo = s3cfb_open_fifo;
+		//ctrl->fb.close_fifo = s3cfb_close_fifo;
 
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_GET_LCD_WIDTH,
-					(unsigned long)&ctrl->fb.lcd_hres);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_GET_LCD_WIDTH,
+		//			(unsigned long)&ctrl->fb.lcd_hres);
 		if (ret < 0) {
 			fimc_err("Fail: S3CFB_GET_LCD_WIDTH\n");
 			goto resource_busy;
 		}
 
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_GET_LCD_HEIGHT,
-					(unsigned long)&ctrl->fb.lcd_vres);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_GET_LCD_HEIGHT,
+		//			(unsigned long)&ctrl->fb.lcd_vres);
 		if (ret < 0) {
 			fimc_err("Fail: S3CFB_GET_LCD_HEIGHT\n");
 			goto resource_busy;
@@ -1296,8 +1296,8 @@ static int fimc_release(struct file *filp)
 	 */
 	if (ctrl->fb.is_enable == 1) {
 		fimc_warn("WIN_OFF for FIMC%d\n", ctrl->id);
-		ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_OFF,
-						(unsigned long)NULL);
+		//ret = s3cfb_direct_ioctl(ctrl->id, S3CFB_SET_WIN_OFF,
+		//				(unsigned long)NULL);
 		if (ret < 0) {
 			fimc_err("direct_ioctl(S3CFB_SET_WIN_OFF) fail\n");
 			return -EINVAL;
