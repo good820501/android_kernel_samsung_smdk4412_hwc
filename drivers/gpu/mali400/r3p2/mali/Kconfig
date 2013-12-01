@@ -41,7 +41,7 @@ if CPU_EXYNOS4210 || CPU_EXYNOS4212 || CPU_EXYNOS4412
 config MALI400_UMP
 	bool "Enable UMP support"
 	depends on MALI400
-	default y
+	default n
 	---help---
 	  This enables support for the UMP memory sharing API in the Mali driver.
 endif
